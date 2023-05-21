@@ -12,6 +12,7 @@ import {
 import * as React from "react";
 import { AxiosError } from "axios";
 import Axios from "./AxiosFront";
+
 import { useState } from "react";
 import GlobalContext from './GlobalContext';
 const Login = ({
@@ -94,7 +95,7 @@ const Login = ({
       const response = await Axios.post('/login',{
         usernameOrEmail,
         password,
-      });
+      },{withCredentials:true});
       if (response.data.success) {  
         setUsernameOrEmail('');
         setPassword('');

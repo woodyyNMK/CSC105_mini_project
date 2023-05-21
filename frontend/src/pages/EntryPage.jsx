@@ -1,7 +1,6 @@
 import {
   Box,
 } from "@mui/material";
-import NavTop1 from "../components/NavTop1";
 import Brand from "../components/Brand";
 import ContentNewCollection from "../components/ContentNewCollection";
 import ContentPopularItems from "../components/ContentPopularItems";

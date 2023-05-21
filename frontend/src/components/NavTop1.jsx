@@ -24,12 +24,35 @@ import {
 import { useContext,useState } from "react";
 import React from "react"
 import LogIn from "./LogIn"
+import Cart from "./Cart"
 import GlobalContext from '../components/GlobalContext';
+import Cookies from "js-cookie";
+import { AxiosError } from "axios";
+import Axios from "./AxiosFront";
 export default function NavTop1() {
   const [openLoginModal, setOpenLoginModal] = useState(false);
   const handleOpen = () => setOpenLoginModal(true);
+  const [openCartModal, setOpenCartModal] = useState(false);
+  const {user,setUser,setStatus,items,setItems} = useContext(GlobalContext);
 
-  const {user,setUser,setStatus} = useContext(GlobalContext);
+  const handleCartOpen = () => {
+    
+    setOpenCartModal(true);
+      // TODO: Implement get notes by user's token
+      // 1. check if user is logged in
+      const userToken = Cookies.get("user");
+      if (userToken !== undefined && userToken !== "undefined") {
+        // 2. call API to get items
+        Axios.get("/Cart_items", {
+          headers: { Authorization: `Bearer ${userToken}` },
+        }).then((res) => {
+          // 3. set items to state
+          setItems(res.data.data);
+        });
+      }
+  }
+
+  
   const buttonWrap = {
     backgroundColor: "#E3DFFD",
     border: "1px solid black",
@@ -75,9 +98,10 @@ export default function NavTop1() {
               <Search />
             </Button>
             {/* {JSON.stringify(user)} */}
-            {user ? (<Button sx={bR} style={{ maxWidth: "40px", minWidth: "40px" }} onClick={handleOpen}><ShoppingCart /></Button>) 
+            {user ? (<Button sx={bR} style={{ maxWidth: "40px", minWidth: "40px" }} onClick={handleCartOpen}><ShoppingCart /></Button>) 
             : (<Button sx={bR} style={{ maxWidth: "40px", minWidth: "40px" }} onClick={handleOpen}><AccountCircle /></Button>)}
-            <LogIn handleOpen={handleOpen} open={openLoginModal} setOpen={setOpenLoginModal} setUser/>
+            <LogIn handleOpen={handleOpen} open={openLoginModal} setOpen={setOpenLoginModal} />
+            <Cart handleCartOpen={handleCartOpen} openCartModal={openCartModal} setOpenCartModal={setOpenCartModal}/>
           </Box>
         </Toolbar>
       </AppBar>

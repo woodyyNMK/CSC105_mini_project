@@ -8,6 +8,7 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { path: '/', element: <EntryPage/> },
+      // { path: '/ItemDetail/:id', element: <ItemDetail/> },
     ],
   },
 ]);
