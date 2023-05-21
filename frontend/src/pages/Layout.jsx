@@ -8,16 +8,14 @@ import NavTop1 from "../components/NavTop1";
 const Layout = () => {
   const [status, setStatus] = useState("");
   const [user, setUser] = useState();
-  const [items, setItems] = useState([]);
+  // const [items, setItems] = useState([]);
   const globalContextValue = useMemo(() => {
     return {
       user,
       setUser,
       setStatus,
-      items,
-      setItems,
     };
-  }, [user, items]); 
+  }, [user]); 
   return(
     <GlobalContext.Provider value={globalContextValue}>
       <Box> 

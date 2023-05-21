@@ -23,44 +23,41 @@ const Cart = ({
   openCartModal = false,
   setOpenCartModal = () => {},
 }) => {
-  // const item =
-  //     {
-  //       image: "./assets/card2.jpg",
-  //       price: "$49.99",
-  //       name: "Tonal Hoodie",
-  //     }
-  const { user, setUser, setStatus,items,setItems} = React.useContext(GlobalContext);
-//   const [items, setItems] = useState([]);
+  const { user, setUser, setStatus} = React.useContext(GlobalContext);
+  const [items, setItems] = useState([
+
+  ]);
 //   const userToken = Cookies.get("user");
   
-//   React.useEffect(() => {
-//     // TODO: Implement get notes by user's token
-//     // 1. check if user is logged in
-//     const userToken = Cookies.get("user");
-//     if (userToken !== undefined && userToken !== "undefined") {
-//       // 2. call API to get items
-//       Axios.get("/Cart_items", {
-//         headers: { Authorization: `Bearer ${userToken}` },
-//       }).then((res) => {
-//         // 3. set items to state
-//         setItems(res.data);
-//       });
-//     }
-//   }, [user]);
+  React.useEffect(() => {
+    // TODO: Implement get notes by user's token
+    // 1. check if user is logged in
+    const userToken = Cookies.get("user");
+    if (userToken !== undefined && userToken !== "undefined") {
+      // 2. call API to get items
+      Axios.get("/Cart_items", {
+        headers: { Authorization: `Bearer ${userToken}` },
+      }).then((res) => {
+        // 3. set items to state
+        setItems(res.data.data);
+      });
+    }
+  }, [user]);
 
 //   const itemDelete = async () => {
 //     // TODO: Implement delete item
 //     try{
 //       // 1. call API to delete item
 //     const userToken = Cookies.get('user');
-//     const response = await Axios.delete(`/note/${targetNote.id}`,{
+//     const response = await Axios.delete(`/Cart_items/${targetItem.id}`,{
 //       headers:{Authorization:`Bearer ${userToken}`},
 //     });
 //     // 2. if successful, set status and remove note from state
 //     if(response.data.success) {
-//       setStatus({severity:'success',msg:'Delete note successfully'});
-//       setNotes(notes.filter((n)=>n.id!==targetNote.id));
-//       handleNoteDetailClose();}
+//       setStatus({severity:'success',msg:'Delete Item successfully'});
+//       setItems(items.filter((n)=>n.id!==targetItem.id));
+//     //   handleNoteDetailClose();
+//     }
 //     }catch(error){
 //       // 3. if delete note failed, check if error is from calling API or not
 //       if(error instanceof AxiosError && error.response) {

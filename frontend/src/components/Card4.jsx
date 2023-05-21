@@ -33,7 +33,7 @@ import {
       >
         <CardMedia
           component="img"
-          sx={{ width: "25%", padding: "15px 10px" }}
+          sx={{ width: "15%", padding: "15px 10px" }}
           style={{ borderRadius: "30px" }}
           image={image}
           alt="Hoodie Image"
@@ -70,7 +70,7 @@ import {
             </Typography>
           </CardContent>
           <Box >
-          <Button sx={chips} 
+          <Button sx={chips} style={{marginLeft:"50%"}} 
                 // onClick={}
             >
             <DeleteIcon/>
