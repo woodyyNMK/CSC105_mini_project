@@ -1,3 +1,4 @@
+// import { useParams } from "react-router-dom";
 const cors=require('cors');
 const express=require('express');
 const mysql=require('mysql2');
@@ -27,7 +28,7 @@ app.use(cookieParser());
 app.post("/register", require('./register'));
 app.post("/login", require("./login"));
 app.get("/Cart_items", require("./getItemsInCart"));
-app.delete('/Cart_items', require("./deleteItemsInCart"));
+app.delete('/Cart_items/:id', require("./deleteItemsInCart"));
 app.use('/static',express.static('images'))
 
 app.listen(port,()=>{

@@ -1,8 +1,8 @@
 var jwt = require('jsonwebtoken');
 module.exports = (req, res) => {
 
-    // const token = req.headers.authorization.split(' ')[1];
-	const token = req.cookies.user;
+    const token = req.headers.authorization.split(' ')[1];
+	// const token = req.cookies.user;
 	var decoded = jwt.verify(token, "ZJGX1QL7ri6BGJWj3t");
 	console.log(decoded);
 	

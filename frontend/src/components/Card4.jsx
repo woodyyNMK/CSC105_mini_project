@@ -7,8 +7,38 @@ import {
     Typography,
   } from "@mui/material";
   import DeleteIcon from '@mui/icons-material/Delete';
+  import React from "react";
+import GlobalContext from '../components/GlobalContext';
+import Cookies from "js-cookie";
+import { AxiosError } from "axios";
+import Axios from "./AxiosFront";
   
-  export default function Card4({image, price, name}) {
+  export default function Card4({image, price, name,itemId,
+    // itemDelete = () => {},
+}) {
+  const { user, setUser, setStatus,items,setItems} = React.useContext(GlobalContext);
+    const itemDelete = async () => {
+    // TODO: Implement delete item
+    try{
+      // 1. call API to delete item
+    const userToken = Cookies.get('user');
+    const response = await Axios.delete(`/Cart_items/${itemId}`,{
+      headers:{Authorization:`Bearer ${userToken}`},
+    });
+    // 2. if successful, set status and remove note from state
+    if(response.data.success) {
+      setStatus({severity:'success',msg:'Delete Item successfully'});
+      setItems(items.filter((i)=>i.id!==itemId));
+    }
+    }catch(error){
+      // 3. if delete note failed, check if error is from calling API or not
+      if(error instanceof AxiosError && error.response) {
+        setStatus({severity:'error',msg:error.response.data.error});
+      }else{
+        setStatus({severity:'error',msg:error.message});
+      }
+    }
+  };
     const chips = {
       backgroundColor: "#BFACE2",
       "&:hover": {
@@ -71,7 +101,7 @@ import {
           </CardContent>
           <Box >
           <Button sx={chips} style={{marginLeft:"50%"}} 
-                // onClick={}
+                onClick={itemDelete}
             >
             <DeleteIcon/>
           </Button>

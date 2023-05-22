@@ -23,10 +23,8 @@ const Cart = ({
   openCartModal = false,
   setOpenCartModal = () => {},
 }) => {
-  const { user, setUser, setStatus} = React.useContext(GlobalContext);
-  const [items, setItems] = useState([
-
-  ]);
+  const { user, setUser, setStatus,items,setItems} = React.useContext(GlobalContext);
+  // const [items, setItems] = useState([]);
 //   const userToken = Cookies.get("user");
   
   React.useEffect(() => {
@@ -44,29 +42,29 @@ const Cart = ({
     }
   }, [user]);
 
-//   const itemDelete = async () => {
-//     // TODO: Implement delete item
-//     try{
-//       // 1. call API to delete item
-//     const userToken = Cookies.get('user');
-//     const response = await Axios.delete(`/Cart_items/${targetItem.id}`,{
-//       headers:{Authorization:`Bearer ${userToken}`},
-//     });
-//     // 2. if successful, set status and remove note from state
-//     if(response.data.success) {
-//       setStatus({severity:'success',msg:'Delete Item successfully'});
-//       setItems(items.filter((n)=>n.id!==targetItem.id));
-//     //   handleNoteDetailClose();
-//     }
-//     }catch(error){
-//       // 3. if delete note failed, check if error is from calling API or not
-//       if(error instanceof AxiosError && error.response) {
-//         setStatus({severity:'error',msg:error.response.data.error});
-//       }else{
-//         setStatus({severity:'error',msg:error.message});
-//       }
-//     }
-//   };
+  // const itemDelete = async () => {
+  //   // TODO: Implement delete item
+  //   try{
+  //     // 1. call API to delete item
+  //   const userToken = Cookies.get('user');
+  //   const response = await Axios.delete(`/Cart_items/${targetItem.id}`,{
+  //     headers:{Authorization:`Bearer ${userToken}`},
+  //   });
+  //   // 2. if successful, set status and remove note from state
+  //   if(response.data.success) {
+  //     setStatus({severity:'success',msg:'Delete Item successfully'});
+  //     setItems(items.filter((i)=>i.id!==targetItem.id));
+  //   //   handleNoteDetailClose();
+  //   }
+  //   }catch(error){
+  //     // 3. if delete note failed, check if error is from calling API or not
+  //     if(error instanceof AxiosError && error.response) {
+  //       setStatus({severity:'error',msg:error.response.data.error});
+  //     }else{
+  //       setStatus({severity:'error',msg:error.message});
+  //     }
+  //   }
+  // };
   const handleClose = () => {
     setOpenCartModal(false);
   };
@@ -124,6 +122,7 @@ const Cart = ({
                       name={item.product_name}
                       price={item.product_price}
                       image={item.product_image}
+                      itemId={item.id}
                     />
                     <br/>
                     </>

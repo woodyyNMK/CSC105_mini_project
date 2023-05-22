@@ -1,5 +1,5 @@
 module.exports = (req, res) => {
-    const id = req.query.id;
+    const id = req.params.id;
 
     connection.query("DELETE FROM Cart_items WHERE id = ?", [id], (err, rows) => {
         if(err) {
