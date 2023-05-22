@@ -120,19 +120,11 @@ export default function NavTop1() {
               </ListItemButton>
             </ListItem>
             <ListItem>
-              <ListItemButton>
+              <ListItemButton onClick={handleCartOpen}>
                 <ListItemIcon>
                   <ShoppingCart />
                 </ListItemIcon>
                 <ListItemText primary={"Cart"} />
-              </ListItemButton>
-            </ListItem>
-            <ListItem>
-              <ListItemButton>
-                <ListItemIcon>
-                  <Favorite />
-                </ListItemIcon>
-                <ListItemText primary={"WishList"} />
               </ListItemButton>
             </ListItem>
             <ListItem>

@@ -1,4 +1,3 @@
-import { Height } from "@mui/icons-material";
 import { Box, Button, Grid, Typography } from "@mui/material";
 
 export default function ItemContent() {

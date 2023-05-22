@@ -52,6 +52,7 @@ export default function ContentNewCollection() {
                 name={item.product_name}
                 image={item.product_image}
                 description={item.desc}
+                product_id={item.id}
               />
             </>
           ))}
@@ -72,6 +73,7 @@ export default function ContentNewCollection() {
                 name={item.product_name}
                 image={item.product_image}
                 description={item.desc}
+                product_id={item.id}
               />
             </>
           ))}
@@ -92,6 +94,7 @@ export default function ContentNewCollection() {
                 name={item.product_name}
                 image={item.product_image}
                 description={item.desc}
+                product_id={item.id}
               />
             </>
           ))}

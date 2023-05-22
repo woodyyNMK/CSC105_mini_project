@@ -1,6 +1,8 @@
 import { Box, Button, Card, CardContent, CardMedia, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
-export default function Card1({image,name, description}) {
+export default function Card1({image,name, description,product_id}) {
+  const navigate = useNavigate();
     const chips ={
         backgroundColor: "#BFACE2",
         "&:hover": {
@@ -43,7 +45,10 @@ export default function Card1({image,name, description}) {
           </Typography>
         </CardContent>
         <Box >
-            <Button  sx={chips} style={{marginBottom:"20px", minWidth: "100px"}}>View More</Button>
+            <Button  sx={chips} 
+            style={{marginBottom:"20px", minWidth: "100px"}}
+            onClick={()=>navigate(`/ItemDetail/${product_id}`)}
+            >View More</Button>
         </Box>
       </Box>
     </Card>

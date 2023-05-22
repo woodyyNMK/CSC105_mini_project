@@ -33,6 +33,7 @@ app.get("/new_items", require("./getNewItems"));
 app.get("/Sale_items", require("./getSaleItems"));
 app.get("/Popular_items", require("./getPopularItems"));
 app.use('/static',express.static('images'))
+app.get("/ItemDetail/:id", require("./getItemDetail"));
 
 app.listen(port,()=>{
     console.log(`App listening on port ${port}`);

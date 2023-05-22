@@ -61,6 +61,7 @@ export default function ContentSaleItems() {
                 name={item.product_name}
                 image={item.product_image}
                 price={item.product_price}
+                product_id={item.id}
               />
             </>
           ))}
@@ -81,6 +82,7 @@ export default function ContentSaleItems() {
                 name={item.product_name}
                 image={item.product_image}
                 price={item.product_price}
+                product_id={item.id}
               />
             </>
           ))}
@@ -101,6 +103,7 @@ export default function ContentSaleItems() {
                 name={item.product_name}
                 image={item.product_image}
                 price={item.product_price}
+                product_id={item.id}
               />
             </>
           ))}

@@ -13,9 +13,7 @@ import Cookies from "js-cookie";
 import { AxiosError } from "axios";
 import Axios from "./AxiosFront";
   
-  export default function Card4({image, price, name,itemId,
-    // itemDelete = () => {},
-}) {
+  export default function Card4({image, price, name,itemId}) {
   const { user, setUser, setStatus,items,setItems} = React.useContext(GlobalContext);
     const itemDelete = async () => {
     // TODO: Implement delete item

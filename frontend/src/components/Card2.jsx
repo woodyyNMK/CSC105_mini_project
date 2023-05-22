@@ -7,8 +7,10 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
-export default function Card2({image, price, name}) {
+export default function Card2({image, price, name,product_id}) {
+  const navigate = useNavigate();
   const chips = {
     backgroundColor: "#BFACE2",
     "&:hover": {
@@ -67,7 +69,10 @@ margin:"auto",
           </Typography>
         </CardContent>
         <Box sx={{margin:"auto"}}>
-        <Button sx={chips} style={{ p:0,margin:0,minWidth:30,maxWidth:30,minHeight:20,maxHeight:20,marginBottom:"20px"  }}>
+        <Button sx={chips} 
+                style={{ p:0,margin:0,minWidth:30,maxWidth:30,minHeight:20,maxHeight:20,marginBottom:"20px"  }}
+                onClick={()=>navigate(`/ItemDetail/${product_id}`)}
+                >
           ...
         </Button>
       </Box>

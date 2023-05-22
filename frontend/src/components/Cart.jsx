@@ -42,29 +42,6 @@ const Cart = ({
     }
   }, [user]);
 
-  // const itemDelete = async () => {
-  //   // TODO: Implement delete item
-  //   try{
-  //     // 1. call API to delete item
-  //   const userToken = Cookies.get('user');
-  //   const response = await Axios.delete(`/Cart_items/${targetItem.id}`,{
-  //     headers:{Authorization:`Bearer ${userToken}`},
-  //   });
-  //   // 2. if successful, set status and remove note from state
-  //   if(response.data.success) {
-  //     setStatus({severity:'success',msg:'Delete Item successfully'});
-  //     setItems(items.filter((i)=>i.id!==targetItem.id));
-  //   //   handleNoteDetailClose();
-  //   }
-  //   }catch(error){
-  //     // 3. if delete note failed, check if error is from calling API or not
-  //     if(error instanceof AxiosError && error.response) {
-  //       setStatus({severity:'error',msg:error.response.data.error});
-  //     }else{
-  //       setStatus({severity:'error',msg:error.message});
-  //     }
-  //   }
-  // };
   const handleClose = () => {
     setOpenCartModal(false);
   };
@@ -90,6 +67,8 @@ const Cart = ({
         <Box
           sx={modalStyle}
           style={{ borderRadius: "30px"}}
+          minHeight={"50vh"}
+          maxHeight={"100vh"}
         >
             {/* {JSON.stringify(items, 2, null)} */}
           <br />
