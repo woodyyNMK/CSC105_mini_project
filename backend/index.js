@@ -29,6 +29,9 @@ app.post("/register", require('./register'));
 app.post("/login", require("./login"));
 app.get("/Cart_items", require("./getItemsInCart"));
 app.delete('/Cart_items/:id', require("./deleteItemsInCart"));
+app.get("/new_items", require("./getNewItems"));
+app.get("/Sale_items", require("./getSaleItems"));
+app.get("/Popular_items", require("./getPopularItems"));
 app.use('/static',express.static('images'))
 
 app.listen(port,()=>{

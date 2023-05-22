@@ -4,39 +4,18 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Card2 from "./Card2";
+import { AxiosError } from "axios";
+import Axios from "./AxiosFront";
+import { useState } from "react";
 export default function ContentSaleItems() {
-  const items = [
-    {
-      image: "./assets/card2.jpg",
-      price: "$49.99",
-      name: "Tonal Hoodie",
-    },
-    {
-      image: "./assets/card2.jpg",
-      price: "$49.99",
-      name: "Tonal Hoodie",
-    },
-    {
-      image: "./assets/card2.jpg",
-      price: "$49.99",
-      name: "Tonal Hoodie",
-    },
-    {
-      image: "./assets/card2.jpg",
-      price: "$49.99",
-      name: "Tonal Hoodie",
-    },
-    {
-      image: "./assets/card2.jpg",
-      price: "$49.99",
-      name: "Tonal Hoodie",
-    },
-    {
-      image: "./assets/card2.jpg",
-      price: "$49.99",
-      name: "Tonal Hoodie",
-    },
-  ];
+  const [saleItems, setSaleItems] = useState([]);
+  React.useEffect(() => {
+    // 2. call API to get items
+    Axios.get("/sale_items").then((res) => {
+      // 3. set items to state
+      setSaleItems(res.data.data);
+    });
+  }, []);
   var setting1 = {
     className: "center",
     centerMode: true,
@@ -76,10 +55,14 @@ export default function ContentSaleItems() {
         </Typography>
         <br />
         <Slider {...setting1}>
-          {items.map((item) => (
-            <div key={Math.random()}>
-              <Card2 image={item.image} price={item.price} name={item.name} />
-            </div>
+          {saleItems.map((item) => (
+            <>
+              <Card2
+                name={item.product_name}
+                image={item.product_image}
+                price={item.product_price}
+              />
+            </>
           ))}
         </Slider>
       </Grid>
@@ -92,10 +75,14 @@ export default function ContentSaleItems() {
         </Typography>
         <br />
         <Slider {...setting2}>
-          {items.map((item) => (
-            <div key={Math.random()}>
-              <Card2 image={item.image} price={item.price} name={item.name} />
-            </div>
+          {saleItems.map((item) => (
+            <>
+              <Card2
+                name={item.product_name}
+                image={item.product_image}
+                price={item.product_price}
+              />
+            </>
           ))}
         </Slider>
       </Grid>
@@ -108,10 +95,14 @@ export default function ContentSaleItems() {
         </Typography>
         <br />
         <Slider {...setting3}>
-          {items.map((item) => (
-            <div key={Math.random()}>
-              <Card2 image={item.image} price={item.price} name={item.name} />
-            </div>
+          {saleItems.map((item) => (
+            <>
+              <Card2
+                name={item.product_name}
+                image={item.product_image}
+                price={item.product_price}
+              />
+            </>
           ))}
         </Slider>
       </Grid>

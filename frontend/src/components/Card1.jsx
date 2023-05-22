@@ -1,6 +1,6 @@
 import { Box, Button, Card, CardContent, CardMedia, Typography } from "@mui/material";
 
-export default function Card1({image, price, name, description}) {
+export default function Card1({image,name, description}) {
     const chips ={
         backgroundColor: "#BFACE2",
         "&:hover": {
