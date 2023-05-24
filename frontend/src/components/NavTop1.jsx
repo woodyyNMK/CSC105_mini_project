@@ -33,9 +33,21 @@ export default function NavTop1() {
   const [openLoginModal, setOpenLoginModal] = useState(false);
   const handleOpen = () => setOpenLoginModal(true);
   const [openCartModal, setOpenCartModal] = useState(false);
-  const {user,setUser,setStatus} = useContext(GlobalContext);
+  const {user,setUser,setStatus,items,setItems} = useContext(GlobalContext);
 
-  const handleCartOpen = () => setOpenCartModal(true);
+  const handleCartOpen = () => {
+    setOpenCartModal(true);
+    const userToken = Cookies.get("user");
+    if (userToken !== undefined && userToken !== "undefined") {
+      // 2. call API to get items
+      Axios.get("/Cart_items", {
+        headers: { Authorization: `Bearer ${userToken}` },
+      }).then((res) => {
+        // 3. set items to state
+        setItems(res.data.data);
+      });
+    }
+  }
   
   const buttonWrap = {
     backgroundColor: "#E3DFFD",

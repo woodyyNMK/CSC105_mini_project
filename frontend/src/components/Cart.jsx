@@ -24,20 +24,20 @@ const Cart = ({
   setOpenCartModal = () => {},
 }) => {
   const { user, setUser, setStatus,items,setItems} = React.useContext(GlobalContext);
-  React.useEffect(() => {
-    // TODO: Implement get notes by user's token
-    // 1. check if user is logged in
-    const userToken = Cookies.get("user");
-    if (userToken !== undefined && userToken !== "undefined") {
-      // 2. call API to get items
-      Axios.get("/Cart_items", {
-        headers: { Authorization: `Bearer ${userToken}` },
-      }).then((res) => {
-        // 3. set items to state
-        setItems(res.data.data);
-      });
-    }
-  }, [user]);
+  // React.useEffect(() => {
+  //   // TODO: Implement get notes by user's token
+  //   // 1. check if user is logged in
+  //   const userToken = Cookies.get("user");
+  //   if (userToken !== undefined && userToken !== "undefined") {
+  //     // 2. call API to get items
+  //     Axios.get("/Cart_items", {
+  //       headers: { Authorization: `Bearer ${userToken}` },
+  //     }).then((res) => {
+  //       // 3. set items to state
+  //       setItems(res.data.data);
+  //     });
+  //   }
+  // }, [user]);
 
   const handleClose = () => {
     setOpenCartModal(false);
