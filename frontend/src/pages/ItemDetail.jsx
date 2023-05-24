@@ -4,8 +4,11 @@ import { Box, Button, Grid, Typography } from "@mui/material";
 import Slider from "react-slick";
 import { AxiosError } from "axios";
 import Axios from "../components/AxiosFront";
-
+import GlobalContext from "../components/GlobalContext";
+import Cookies from "js-cookie";
 export default function ItemDetail() {
+  const { user, setUser, setStatus, items, setItems } =
+  React.useContext(GlobalContext);
   const { id } = useParams();
   const [details, setDetails] = useState({});
   React.useEffect(() => {
@@ -15,6 +18,46 @@ export default function ItemDetail() {
       setDetails(res.data.data);
     });
   }, []);
+
+  const product_id=id;
+  const product_name=details.product_name;
+  const product_price=details.product_price;
+  const product_image=details.product_image; 
+  // const userToken = Cookies.get('user');
+  const itemAdd = () => {
+      // 1. call API to delete item
+    const userToken = Cookies.get('user');
+    if (userToken !== undefined && userToken !== "undefined") {
+    Axios.post(`/ItemDetail/${id}`,{product_id,product_name,product_price,product_image}
+    ,{
+      headers: { 
+        "Authorization": `Bearer ${userToken}` 
+      }
+    }
+    ).then((res) =>{
+      setStatus({
+        msg: 'Add Item successfully',
+        severity: 'success'
+      });
+    });
+  }
+};
+    // 2. if successful, set status and remove note from state
+    // if(response.data.success) {
+    //   setStatus({
+    //     msg: response.data.msg,
+    //     severity: 'success'
+    //   });
+    // }
+  //   }catch(error){
+  //     // 3. if delete note failed, check if error is from calling API or not
+  //     if(error instanceof AxiosError && error.response) {
+  //       setStatus({severity:'error',msg:error.response.data.error});
+  //     }else{
+  //       setStatus({severity:'error',msg:error.message});
+  //     }
+  //   }
+  // };
   var setting1 = {
     dots: true,
     infinite: true,
@@ -81,7 +124,7 @@ export default function ItemDetail() {
           </Slider>
         </Box>
       </Box>
-      {/* <ItemContent/> */}
+
       <Grid
         container
         sx={{
@@ -117,10 +160,14 @@ export default function ItemDetail() {
             }}
           >
             Price : ${details.product_price}
+            {/* {JSON.stringify(userToken)} */}
           </Typography>
         </Box>
         <Box sx={{ p: 3 }}>{details.product_desc}</Box>
-        <Button sx={chips} style={{ marginBottom: "20px", minWidth: "50vw" }}>
+        <Button sx={chips} 
+                style={{ marginBottom: "20px", minWidth: "50vw" }}
+                onClick={itemAdd}
+                >
           Add To Cart
         </Button>
         <hr

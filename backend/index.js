@@ -34,6 +34,8 @@ app.get("/Sale_items", require("./getSaleItems"));
 app.get("/Popular_items", require("./getPopularItems"));
 app.use('/static',express.static('images'))
 app.get("/ItemDetail/:id", require("./getItemDetail"));
+app.post("/ItemDetail/:id", require("./addItemToCart"));
+
 
 app.listen(port,()=>{
     console.log(`App listening on port ${port}`);

@@ -24,9 +24,6 @@ const Cart = ({
   setOpenCartModal = () => {},
 }) => {
   const { user, setUser, setStatus,items,setItems} = React.useContext(GlobalContext);
-  // const [items, setItems] = useState([]);
-//   const userToken = Cookies.get("user");
-  
   React.useEffect(() => {
     // TODO: Implement get notes by user's token
     // 1. check if user is logged in
