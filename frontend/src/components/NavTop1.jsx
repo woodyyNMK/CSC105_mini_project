@@ -29,12 +29,13 @@ import GlobalContext from '../components/GlobalContext';
 import Cookies from "js-cookie";
 import { AxiosError } from "axios";
 import Axios from "./AxiosFront";
+import { useNavigate } from "react-router-dom";
 export default function NavTop1() {
   const [openLoginModal, setOpenLoginModal] = useState(false);
   const handleOpen = () => setOpenLoginModal(true);
   const [openCartModal, setOpenCartModal] = useState(false);
   const {user,setUser,setStatus,items,setItems} = useContext(GlobalContext);
-
+  const navigate = useNavigate();
   const handleCartOpen = () => {
     setOpenCartModal(true);
     const userToken = Cookies.get("user");
@@ -45,6 +46,9 @@ export default function NavTop1() {
       }).then((res) => {
         // 3. set items to state
         setItems(res.data.data);
+        setStatus({
+          msg : "loaded the items in cart"
+        })
       });
     }
   }
@@ -124,7 +128,7 @@ export default function NavTop1() {
           </Toolbar>
           <List>
             <ListItem>
-              <ListItemButton>
+              <ListItemButton onClick={()=>navigate(`/`)}>
                 <ListItemIcon>
                   <Home />
                 </ListItemIcon>
@@ -139,14 +143,14 @@ export default function NavTop1() {
                 <ListItemText primary={"Cart"} />
               </ListItemButton>
             </ListItem>
-            <ListItem>
+            {/* <ListItem>
               <ListItemButton>
                 <ListItemIcon>
                   <AccountCircle />
                 </ListItemIcon>
                 <ListItemText primary={"Profile"} />
               </ListItemButton>
-            </ListItem>
+            </ListItem> */}
             <ListItem>
               <ListItemButton onClick={handleOpen}>
                 <ListItemIcon>

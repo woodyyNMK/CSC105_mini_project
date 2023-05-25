@@ -18,7 +18,7 @@ const Layout = () => {
       items,
       setItems,
     };
-  }, [user, items]); 
+  }, [user,items]); 
   const generatekey = () => {
     return Math.random();
   };

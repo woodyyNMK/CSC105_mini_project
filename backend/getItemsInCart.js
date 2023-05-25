@@ -7,7 +7,7 @@ module.exports = (req, res) => {
 	console.log(decoded);
 	// console.log(decoded.userId);
 	
-	connection.query("SELECT * FROM Cart_items WHERE user_id = ?",[decoded.userId], (err, rows) => {
+	connection.query("SELECT * FROM Cart_items WHERE user_id = ? and checkout = 0",[decoded.userId], (err, rows) => {
 		// Check if cannot find the data in the database then return the error
 		if (err) {
 			res.json({

@@ -23,7 +23,8 @@ const Cart = ({
   openCartModal = false,
   setOpenCartModal = () => {},
 }) => {
-  const { user, setUser, setStatus,items,setItems} = React.useContext(GlobalContext);
+  const { user, setUser, setStatus, items, setItems } =
+    React.useContext(GlobalContext);
   // React.useEffect(() => {
   //   // TODO: Implement get notes by user's token
   //   // 1. check if user is logged in
@@ -38,11 +39,29 @@ const Cart = ({
   //     });
   //   }
   // }, [user]);
-
   const handleClose = () => {
     setOpenCartModal(false);
   };
-
+  const purchaseItem = () => {
+    // 1. call API to delete item
+    const checkout = 1;
+  const userToken = Cookies.get('user');
+  if (userToken !== undefined && userToken !== "undefined") {
+  Axios.post("/Cart_items",{checkout}
+  ,{
+    headers: { 
+      Authorization: `Bearer ${userToken}` 
+    }
+  }
+  ).then((res) =>{
+    setStatus({
+      msg: 'Purchase Item successfully',
+      severity: 'success'
+    });
+    setOpenCartModal(false);
+  });
+}
+};
   const modalStyle = {
     position: "absolute",
     bgcolor: "#E5D1FA",
@@ -58,16 +77,29 @@ const Cart = ({
     fontFamily: "Roboto",
     fontSize: { xs: "20px", md: "30px" },
   };
+  const chips = {
+    backgroundColor: "#BFACE2",
+    "&:hover": {
+      backgroundColor: "#BFACE2",
+    },
+    color: "black",
+    border: "1px solid #BFACE2",
+    borderRadius: "30px",
+    textTransform: "none",
+    padding: "8px 0 8px 0",
+    boxShadow: "-2px 4px 4px rgba(0, 0, 0, 0.1)",
+    fontWeight: "bolder",
+  };
   return (
     <Box>
       <Modal open={openCartModal} onClose={handleClose}>
         <Box
           sx={modalStyle}
-          style={{ borderRadius: "30px"}}
+          style={{ borderRadius: "30px" }}
           minHeight={"50vh"}
           maxHeight={"100vh"}
         >
-            {/* {JSON.stringify(items, 2, null)} */}
+          {/* {JSON.stringify(items, 2, null)} */}
           <br />
           <IconButton onClick={handleClose} style={{ marginLeft: "10px" }}>
             <CloseIcon />
@@ -91,19 +123,28 @@ const Cart = ({
                 Let's browse new items.
               </Typography>
             ) : (
+              <Box sx={{display:"flex", flexDirection:"column",alignItems:"center"}}>
               <Box>
                 {items.map((item) => (
-                    <>
+                  <>
                     <Card4
                       name={item.product_name}
                       price={item.product_price}
                       image={item.product_image}
                       itemId={item.id}
                     />
-                    <br/>
-                    </>
+                    <br />
+                  </>
                 ))}
               </Box>
+              <Button
+              sx={chips}
+              style={{ marginBottom: "20px", width: "200px" }}
+              onClick={purchaseItem}
+            >
+              Purchase
+            </Button>
+            </Box>
             )
           ) : (
             <Typography

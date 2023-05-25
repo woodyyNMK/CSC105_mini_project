@@ -28,6 +28,7 @@ app.use(cookieParser());
 app.post("/register", require('./register'));
 app.post("/login", require("./login"));
 app.get("/Cart_items", require("./getItemsInCart"));
+app.post("/Cart_items", require("./purchaseItemsInCart"));
 app.delete('/Cart_items/:id', require("./deleteItemsInCart"));
 app.get("/new_items", require("./getNewItems"));
 app.get("/Sale_items", require("./getSaleItems"));

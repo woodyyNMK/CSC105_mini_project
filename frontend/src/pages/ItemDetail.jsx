@@ -42,22 +42,6 @@ export default function ItemDetail() {
     });
   }
 };
-    // 2. if successful, set status and remove note from state
-    // if(response.data.success) {
-    //   setStatus({
-    //     msg: response.data.msg,
-    //     severity: 'success'
-    //   });
-    // }
-  //   }catch(error){
-  //     // 3. if delete note failed, check if error is from calling API or not
-  //     if(error instanceof AxiosError && error.response) {
-  //       setStatus({severity:'error',msg:error.response.data.error});
-  //     }else{
-  //       setStatus({severity:'error',msg:error.message});
-  //     }
-  //   }
-  // };
   var setting1 = {
     dots: true,
     infinite: true,
@@ -164,12 +148,18 @@ export default function ItemDetail() {
           </Typography>
         </Box>
         <Box sx={{ p: 3 }}>{details.product_desc}</Box>
-        <Button sx={chips} 
+        {user ? (<Button sx={chips} 
                 style={{ marginBottom: "20px", minWidth: "50vw" }}
                 onClick={itemAdd}
                 >
           Add To Cart
-        </Button>
+        </Button>): (<Button sx={chips} 
+                style={{ marginBottom: "20px", minWidth: "50vw" }}
+                onClick={itemAdd}
+                disabled
+                >
+          Add To Cart
+        </Button>)}
         <hr
           style={{
             width: "80vw",
