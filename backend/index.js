@@ -25,17 +25,18 @@ app.use(cors({
     credentials: true,
   }));
 app.use(cookieParser());
-app.post("/register", require('./register'));
-app.post("/login", require("./login"));
-app.get("/Cart_items", require("./getItemsInCart"));
-app.post("/Cart_items", require("./purchaseItemsInCart"));
-app.delete('/Cart_items/:id', require("./deleteItemsInCart"));
-app.get("/new_items", require("./getNewItems"));
-app.get("/Sale_items", require("./getSaleItems"));
-app.get("/Popular_items", require("./getPopularItems"));
+app.post("/register", require('./routes/register'));
+app.post("/login", require("./routes/login"));
+app.get("/Cart_items", require("./routes/getItemsInCart"));
+app.get("/Past_items", require("./routes/getPastOrders"));
+app.post("/Cart_items", require("./routes/purchaseItemsInCart"));
+app.delete('/Cart_items/:id', require("./routes/deleteItemsInCart"));
+app.get("/new_items", require("./routes/getNewItems"));
+app.get("/Sale_items", require("./routes/getSaleItems"));
+app.get("/Popular_items", require("./routes/getPopularItems"));
 app.use('/static',express.static('images'))
-app.get("/ItemDetail/:id", require("./getItemDetail"));
-app.post("/ItemDetail/:id", require("./addItemToCart"));
+app.get("/ItemDetail/:id", require("./routes/getItemDetail"));
+app.post("/ItemDetail/:id", require("./routes/addItemToCart"));
 
 
 app.listen(port,()=>{

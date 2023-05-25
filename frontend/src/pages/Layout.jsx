@@ -10,6 +10,7 @@ const Layout = () => {
   const [status, setStatus] = useState("");
   const [user, setUser] = useState();
   const [items, setItems] = useState([]);
+  const [pastItems, setPastItems] = useState([]);
   const globalContextValue = useMemo(() => {
     return {
       user,
@@ -17,8 +18,10 @@ const Layout = () => {
       setStatus,
       items,
       setItems,
+      pastItems,
+      setPastItems
     };
-  }, [user,items]); 
+  }, [user,items,pastItems]); 
   const generatekey = () => {
     return Math.random();
   };

@@ -14,9 +14,10 @@ import {
 import {
   AccountCircle,
   Close,
-  Favorite,
   Home,
   Login,
+  Logout,
+  History,
   Menu,
   Search,
   ShoppingCart,
@@ -25,6 +26,7 @@ import { useContext,useState } from "react";
 import React from "react"
 import LogIn from "./LogIn"
 import Cart from "./Cart"
+import PastOrder from "./PastOrder"
 import GlobalContext from '../components/GlobalContext';
 import Cookies from "js-cookie";
 import { AxiosError } from "axios";
@@ -34,7 +36,8 @@ export default function NavTop1() {
   const [openLoginModal, setOpenLoginModal] = useState(false);
   const handleOpen = () => setOpenLoginModal(true);
   const [openCartModal, setOpenCartModal] = useState(false);
-  const {user,setUser,setStatus,items,setItems} = useContext(GlobalContext);
+  const [openPastOrderModal, setOpenPastOrderModal] = useState(false);
+  const {user,setUser,setStatus,items,setItems,pastItems,setPastItems} = useContext(GlobalContext);
   const navigate = useNavigate();
   const handleCartOpen = () => {
     setOpenCartModal(true);
@@ -48,6 +51,22 @@ export default function NavTop1() {
         setItems(res.data.data);
         setStatus({
           msg : "loaded the items in cart"
+        })
+      });
+    }
+  }
+  const handlePastOrderOpen = () => {
+    setOpenPastOrderModal(true);
+    const userToken = Cookies.get("user");
+    if (userToken !== undefined && userToken !== "undefined") {
+      // 2. call API to get items
+      Axios.get("/Past_items", {
+        headers: { Authorization: `Bearer ${userToken}` },
+      }).then((res) => {
+        // 3. set items to state
+        setPastItems(res.data.data);
+        setStatus({
+          msg : "loaded the purchased items in cart"
         })
       });
     }
@@ -88,11 +107,9 @@ export default function NavTop1() {
           <IconButton edge="start" onClick={handleDrawerToggle}>
             <Menu />
           </IconButton>
-
           <Box marginLeft={"60px"}>
             <img src="./assets/logo.svg" />
           </Box>
-
           <Box sx={buttonWrap}>
             <Button sx={bL} style={{ maxWidth: "40px", minWidth: "40px" }}>
               <Search />
@@ -102,6 +119,7 @@ export default function NavTop1() {
             : (<Button sx={bR} style={{ maxWidth: "40px", minWidth: "40px" }} onClick={handleOpen}><AccountCircle /></Button>)}
             <LogIn handleOpen={handleOpen} open={openLoginModal} setOpen={setOpenLoginModal} />
             <Cart handleCartOpen={handleCartOpen} openCartModal={openCartModal} setOpenCartModal={setOpenCartModal}/>
+            <PastOrder handlePastOrderOpen={handlePastOrderOpen} openPastOrderModal={openPastOrderModal} setOpenPastOrderModal={setOpenPastOrderModal} />
           </Box>
         </Toolbar>
       </AppBar>
@@ -143,22 +161,45 @@ export default function NavTop1() {
                 <ListItemText primary={"Cart"} />
               </ListItemButton>
             </ListItem>
-            {/* <ListItem>
-              <ListItemButton>
+            
+            {user ?
+              (<>
+              <ListItem>
+                <ListItemButton 
+                  onClick={handlePastOrderOpen}
+                >
                 <ListItemIcon>
-                  <AccountCircle />
+                  <History/>
                 </ListItemIcon>
-                <ListItemText primary={"Profile"} />
-              </ListItemButton>
-            </ListItem> */}
-            <ListItem>
-              <ListItemButton onClick={handleOpen}>
+                <ListItemText primary={"Past Orders"} />
+                </ListItemButton>
+              </ListItem>
+              <ListItem>
+                <ListItemButton 
+                  // onClick={handleOpen}
+                >
+                <ListItemIcon>
+                  <Logout />
+                </ListItemIcon>
+                <ListItemText primary={"Log Out"} />
+                </ListItemButton>
+              </ListItem>
+              </>
+              )
+              :
+              (<ListItem>
+                <ListItemButton
+                  onClick={handleOpen}
+                >
                 <ListItemIcon>
                   <Login />
                 </ListItemIcon>
                 <ListItemText primary={"Log In"} />
-              </ListItemButton>
-            </ListItem>
+                </ListItemButton>
+              </ListItem>
+              )
+            }
+            
           </List>
         </Box>
       </Drawer>

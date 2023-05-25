@@ -1,6 +1,4 @@
 import CloseIcon from "@mui/icons-material/Close";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import {
   Box,
   Button,
@@ -13,7 +11,6 @@ import {
 import * as React from "react";
 import { AxiosError } from "axios";
 import Axios from "./AxiosFront";
-import { useState } from "react";
 import GlobalContext from "./GlobalContext";
 import Card4 from "./Card4";
 import Cookies from "js-cookie";
