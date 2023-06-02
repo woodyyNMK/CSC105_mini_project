@@ -40,7 +40,6 @@ export default function NavTop1() {
   const {user,setUser,setStatus,items,setItems,pastItems,setPastItems} = useContext(GlobalContext);
   const navigate = useNavigate();
   const handleCartOpen = () => {
-    setOpenCartModal(true);
     const userToken = Cookies.get("user");
     if (userToken !== undefined && userToken !== "undefined") {
       // 2. call API to get items
@@ -54,6 +53,7 @@ export default function NavTop1() {
         })
       });
     }
+    setOpenCartModal(true);
   }
   const handlePastOrderOpen = () => {
     setOpenPastOrderModal(true);
@@ -98,6 +98,11 @@ export default function NavTop1() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
+  };
+
+  const logOut = () => {
+    setUser();
+    Cookies.remove("user");
   };
 
   return (
@@ -176,7 +181,7 @@ export default function NavTop1() {
               </ListItem>
               <ListItem>
                 <ListItemButton 
-                  // onClick={handleOpen}
+                  onClick={logOut}
                 >
                 <ListItemIcon>
                   <Logout />

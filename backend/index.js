@@ -29,7 +29,7 @@ app.post("/register", require('./routes/register'));
 app.post("/login", require("./routes/login"));
 app.get("/Cart_items", require("./routes/getItemsInCart"));
 app.get("/Past_items", require("./routes/getPastOrders"));
-app.post("/Cart_items", require("./routes/purchaseItemsInCart"));
+app.patch("/Cart_items", require("./routes/purchaseItemsInCart"));
 app.delete('/Cart_items/:id', require("./routes/deleteItemsInCart"));
 app.get("/new_items", require("./routes/getNewItems"));
 app.get("/Sale_items", require("./routes/getSaleItems"));

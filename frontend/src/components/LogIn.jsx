@@ -102,7 +102,7 @@ const Login = ({
         handleClose();
         setUser(response.data);
         setStatus({
-          msg:response.data.msg,
+          msg:'Log In Successfully',
           severity:'success'
         });
       }
@@ -206,7 +206,7 @@ const Login = ({
         setRePassword('');
         setIsChecked(false);
         setStatus({
-          msg: response.data.msg,
+          msg: 'Account Created Successfully',
           severity: 'success'
         });
         setSignUpOpen(false);
