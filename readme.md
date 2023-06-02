@@ -421,7 +421,7 @@ Example
 
 ```
 
-### Delete Note
+### Delete item
 
 #### URL
 `DELETE /Cart_items/:id`
